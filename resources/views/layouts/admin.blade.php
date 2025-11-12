@@ -30,6 +30,24 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- navbar-brand => define el logotipo o nombre de la aplicación -->
     <a class="navbar-brand" href="{{ url('/') }}">MiApp</a>
+    <div class="ml-auto">
+      @auth
+        {{-- // minimal change. --}}
+        <span class="mr-3">Hola, {{ auth()->user()->nombre ?? auth()->user()->name }}</span>
+        @if (auth()->user()->isAdmin)
+          {{-- // minimal change. --}}
+          <a class="btn btn-link" href="{{ route('categorias.index') }}">Administración</a>
+        @endif
+        <form class="d-inline" method="POST" action="{{ route('logout') }}">
+          @csrf
+          <button type="submit" class="btn btn-outline-secondary btn-sm">Cerrar sesión</button>
+        </form>
+      @else
+        {{-- // minimal change. --}}
+        <a class="btn btn-link" href="{{ route('login') }}">Iniciar sesión</a>
+        <a class="btn btn-primary" href="{{ route('register') }}">Registrarse</a>
+      @endauth
+    </div>
   </nav>
 
   <!-- container => centra el contenido y le da márgenes automáticos laterales -->

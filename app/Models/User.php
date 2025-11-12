@@ -21,6 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'nombre', // minimal change.
+        'dni', // minimal change.
+        'fecha_nacimiento', // minimal change.
+        'domicilio', // minimal change.
+        'telefono', // minimal change.
+        'role', // minimal change.
+        'profile_locked', // minimal change.
     ];
 
     /**
@@ -41,5 +48,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'fecha_nacimiento' => 'date', // minimal change.
+        'profile_locked' => 'boolean', // minimal change.
     ];
+
+    public function getIsAdminAttribute(): bool
+    {
+        // minimal change.
+        return $this->role === 'admin';
+    }
 }
