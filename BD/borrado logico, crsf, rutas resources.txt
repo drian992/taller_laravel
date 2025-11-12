@@ -1,0 +1,4 @@
+ALTER TABLE `categorias` ADD `created_at` TIMESTAMP NULL AFTER `descripcion`, ADD `updated_at` TIMESTAMP NULL AFTER `created_at`;
+ALTER TABLE `categorias` ADD `deleted_at` TIMESTAMP NOT NULL AFTER `updated_at`;
+
+https://view.genially.com/68c97d958c8712bbc24eb767/presentation-rutas-resources-crsf-borrado-logico

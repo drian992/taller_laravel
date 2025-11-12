@@ -1,0 +1,11 @@
+1.crear un proyecto en laravel 
+2.crear una tabla persona en base de datos prueba_prueba_patrimonio
+ id_persona (int autoincrement y clave primaria)
+ apellido (varchar)
+ nombre(varchar)
+ dni (varchar)
+3. crear un modelo y hacer referencia a la tabla creada
+4. crear un controlador y traer el listado de personas
+5. crear una vista para mostrar l listado de personas
+
+https://view.genially.com/68bf32f64a7537c805286418/presentation-abm-laravel

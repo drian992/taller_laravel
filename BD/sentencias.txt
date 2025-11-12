@@ -1,0 +1,11 @@
+//crear un proyecto laravel
+composer create-project laravel/laravel:^10.0 mi_proyecto
+
+//levantar el servidor
+php artisan serve
+
+//crear un modelo
+php artisan make:model MiModelo
+
+//Crear controlador
+php artisan make:controller MiModeloController
