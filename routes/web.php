@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\Auth\LoginController; // minimal change.
+use App\Http\Controllers\Auth\RegisterController; // minimal change.
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +18,27 @@ use App\Http\Controllers\CategoriasController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('categorias', CategoriasController::class);
-//Route::resource('empleados', EmpleadosController::class);
-//Route::resource('categorias', CategoriasController::class)->only(['index','create','store']);
-Route::post('categorias/restaurar/{categoria}',       [CategoriasController::class, 'restaurar'])->name('categorias.restaurar');
+
+Route::middleware('guest')->group(function () {
+    // minimal change.
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [LoginController::class, 'login']);
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [RegisterController::class, 'register']);
+});
+
+Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout'); // minimal change.
+
+Route::middleware('auth')->group(function () {
+    // minimal change.
+    Route::view('/dashboard', 'welcome')->name('dashboard');
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // minimal change.
+    Route::resource('categorias', CategoriasController::class);
+    Route::post('categorias/restaurar/{categoria}', [CategoriasController::class, 'restaurar'])->name('categorias.restaurar');
+});
 /*Route::get('categorias',        [CategoriasController::class, 'index'])->name('categorias.index');
 Route::get('categorias/create', [CategoriasController::class, 'create'])->name('categorias.create');
 Route::post('categorias',       [CategoriasController::class, 'store'])->name('categorias.store');
