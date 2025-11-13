@@ -32,7 +32,7 @@ Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->n
 
 Route::middleware('auth')->group(function () {
     // minimal change.
-    Route::view('/dashboard', 'welcome')->name('dashboard');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

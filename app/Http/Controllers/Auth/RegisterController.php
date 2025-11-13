@@ -44,7 +44,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect($this->redirectPath());
+        return redirect()->intended($this->redirectPath());
     }
 
     protected function validator(array $data)
