@@ -15,8 +15,7 @@
   <div class="col-md-10">
 
     <!-- Includes de Blade para mensajes de éxito y errores -->
-    @include('compartido.mensajes') 
-    @include('compartido.errores') 
+    @include('compartido.errores')
 </div>
 </div>
 <br>

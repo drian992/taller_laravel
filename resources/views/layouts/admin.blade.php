@@ -38,6 +38,7 @@
           {{-- // minimal change. --}}
           <a class="btn btn-link" href="{{ route('personas.index') }}">Personas</a>
           <a class="btn btn-link" href="{{ route('categorias.index') }}">Categorías</a>
+          <a class="btn btn-link" href="{{ route('admin.users.create') }}">Registrar usuario</a>
         @endif
         <form class="d-inline" method="POST" action="{{ route('logout') }}">
           @csrf
@@ -54,6 +55,7 @@
   <!-- container => centra el contenido y le da márgenes automáticos laterales -->
   <!-- py-4 => padding vertical (arriba y abajo) de 1.5rem (~24px) -->
   <div class="container py-4">
+    @include('compartido.mensajes')
     <!-- yield('contenido') => espacio donde cada vista Blade inyecta su propio contenido -->
     @yield('contenido')
   </div>
