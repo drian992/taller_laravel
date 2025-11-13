@@ -22,17 +22,13 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" value="{{ old('fecha_nacimiento') }}" required>
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" id="telefono" name="telefono" class="form-control" value="{{ old('telefono') }}" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="domicilio">Domicilio</label>
-                        <input type="text" id="domicilio" name="domicilio" class="form-control" value="{{ old('domicilio') }}" required>
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion" class="form-control" value="{{ old('direccion') }}" required>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" id="telefono" name="telefono" class="form-control" value="{{ old('telefono') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Correo electrónico</label>

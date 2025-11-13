@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\Auth\LoginController; // minimal change.
 use App\Http\Controllers\Auth\RegisterController; // minimal change.
+use App\Http\Controllers\PersonasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,13 +32,16 @@ Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->n
 
 Route::middleware('auth')->group(function () {
     // minimal change.
-    Route::view('/dashboard', 'welcome')->name('dashboard');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // minimal change.
     Route::resource('categorias', CategoriasController::class);
     Route::post('categorias/restaurar/{categoria}', [CategoriasController::class, 'restaurar'])->name('categorias.restaurar');
+    Route::resource('personas', PersonasController::class)->except(['create', 'store', 'show']);
+    Route::post('personas/{persona}/restaurar', [PersonasController::class, 'restaurar'])->name('personas.restaurar');
+    Route::delete('personas/{persona}/eliminar-definitivo', [PersonasController::class, 'eliminarDefinitivo'])->name('personas.eliminar-definitivo');
 });
 /*Route::get('categorias',        [CategoriasController::class, 'index'])->name('categorias.index');
 Route::get('categorias/create', [CategoriasController::class, 'create'])->name('categorias.create');
