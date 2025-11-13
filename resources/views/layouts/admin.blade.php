@@ -36,7 +36,8 @@
         <span class="mr-3">Hola, {{ auth()->user()->nombre ?? auth()->user()->name }}</span>
         @if (auth()->user()->isAdmin)
           {{-- // minimal change. --}}
-          <a class="btn btn-link" href="{{ route('categorias.index') }}">Administración</a>
+          <a class="btn btn-link" href="{{ route('personas.index') }}">Personas</a>
+          <a class="btn btn-link" href="{{ route('categorias.index') }}">Categorías</a>
         @endif
         <form class="d-inline" method="POST" action="{{ route('logout') }}">
           @csrf
