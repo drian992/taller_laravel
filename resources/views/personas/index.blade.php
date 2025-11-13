@@ -5,9 +5,8 @@
 @section('contenido')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">Personas registradas</h1>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Registrar nuevo usuario</a>
     </div>
-
-    @include('compartido.mensajes')
 
     <div class="card mb-4">
         <div class="card-header">Listado activo</div>

@@ -42,6 +42,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('personas', PersonasController::class)->except(['create', 'store', 'show']);
     Route::post('personas/{persona}/restaurar', [PersonasController::class, 'restaurar'])->name('personas.restaurar');
     Route::delete('personas/{persona}/eliminar-definitivo', [PersonasController::class, 'eliminarDefinitivo'])->name('personas.eliminar-definitivo');
+    Route::get('usuarios/registrar', [RegisterController::class, 'showAdminRegistrationForm'])->name('admin.users.create');
+    Route::post('usuarios/registrar', [RegisterController::class, 'registerFromAdmin'])->name('admin.users.store');
 });
 /*Route::get('categorias',        [CategoriasController::class, 'index'])->name('categorias.index');
 Route::get('categorias/create', [CategoriasController::class, 'create'])->name('categorias.create');

@@ -32,8 +32,7 @@
   <div class="col-12 col-md-11">
 
     <!-- Includes de Blade para mensajes de éxito y errores -->
-    @include('compartido.mensajes') 
-    @include('compartido.errores')  
+    @include('compartido.errores')
 
     <!-- table-responsive => hace que la tabla sea "scrollable" en pantallas pequeñas -->
     <div class="table-responsive">

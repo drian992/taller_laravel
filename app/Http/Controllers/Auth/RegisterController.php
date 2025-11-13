@@ -24,10 +24,17 @@ class RegisterController extends Controller
     public function __construct()
     {
         // minimal change.
-        $this->middleware('guest');
+        $this->middleware('guest')->except(['showAdminRegistrationForm', 'registerFromAdmin']);
+        $this->middleware(['auth', 'role:admin'])->only(['showAdminRegistrationForm', 'registerFromAdmin']);
     }
 
     public function showRegistrationForm()
+    {
+        // minimal change.
+        return view('auth.register');
+    }
+
+    public function showAdminRegistrationForm()
     {
         // minimal change.
         return view('auth.register');
@@ -44,7 +51,19 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended($this->redirectPath());
+        return redirect()->intended($this->redirectPath())->with('mensaje-success', 'Tus datos fueron cargados exitosamente.');
+    }
+
+    public function registerFromAdmin(Request $request): RedirectResponse
+    {
+        // minimal change.
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+
+        event(new Registered($user));
+
+        return redirect()->route('personas.index')->with('mensaje-success', 'Usuario registrado correctamente.');
     }
 
     protected function validator(array $data)

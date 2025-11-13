@@ -1,14 +1,18 @@
 @extends('layouts.admin')
 
-@section('title', 'Registrarse')
+@php
+    $adminContext = auth()->check() && auth()->user()->isAdmin;
+@endphp
+
+@section('title', $adminContext ? 'Registrar usuario' : 'Registrarse')
 
 @section('contenido')
     {{-- // minimal change. --}}
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="mb-4">Crear cuenta</h1>
+            <h1 class="mb-4">{{ $adminContext ? 'Registrar usuario' : 'Crear cuenta' }}</h1>
             @include('compartido.errores')
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ $adminContext ? route('admin.users.store') : route('register') }}">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -44,7 +48,7 @@
                         <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Registrarme</button>
+                <button type="submit" class="btn btn-primary">{{ $adminContext ? 'Registrar usuario' : 'Registrarme' }}</button>
             </form>
         </div>
     </div>
