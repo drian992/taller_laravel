@@ -13,7 +13,7 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      */
-    protected $redirectTo = '/'; // minimal change.
+    protected $redirectTo = '/dashboard'; // minimal change.
 
     public function __construct()
     {
@@ -38,7 +38,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, false)) {
             $request->session()->regenerate();
 
-            return redirect()->intended($this->redirectTo);
+            return redirect()->intended($this->redirectPath());
         }
 
         throw ValidationException::withMessages([
@@ -55,5 +55,20 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    protected function redirectPath(): string
+    {
+        $user = Auth::user();
+
+        if ($user && $user->isAdmin) {
+            return route('personas.index');
+        }
+
+        if ($user) {
+            return route('dashboard');
+        }
+
+        return $this->redirectTo;
     }
 }

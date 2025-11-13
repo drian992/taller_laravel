@@ -19,7 +19,7 @@ class RegisterController extends Controller
     /**
      * Where to redirect users after registration.
      */
-    protected $redirectTo = '/'; // minimal change.
+    protected $redirectTo = '/dashboard'; // minimal change.
 
     public function __construct()
     {
@@ -105,6 +105,16 @@ class RegisterController extends Controller
     protected function redirectPath(): string
     {
         // minimal change.
+        $user = Auth::user();
+
+        if ($user && $user->isAdmin) {
+            return route('personas.index');
+        }
+
+        if ($user) {
+            return route('dashboard');
+        }
+
         return $this->redirectTo;
     }
 }
